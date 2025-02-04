@@ -1,0 +1,17 @@
+digraph RAG_Workflow {
+	rankdir=TB size=8
+	"User Input" [fillcolor=lightblue shape=ellipse style=filled]
+	"Query Encoder" [fillcolor=lightgray shape=box style=filled]
+	"Vector Database" [fillcolor=lightyellow shape=cylinder style=filled]
+	Retriever [fillcolor=lightgray shape=box style=filled]
+	"Relevant Documents" [fillcolor=lightgreen shape=parallelogram style=filled]
+	"LLM (Language Model)" [fillcolor=lightgray shape=box style=filled]
+	"Generated Response" [fillcolor=lightblue shape=ellipse style=filled]
+	"User Input" -> "Query Encoder" [label="1. Convert query to embedding"]
+	"Query Encoder" -> "Vector Database" [label="2. Search for similar embeddings"]
+	"Vector Database" -> Retriever [label="3. Retrieve top relevant documents"]
+	Retriever -> "Relevant Documents" [label="4. Return retrieved context"]
+	"Relevant Documents" -> "LLM (Language Model)" [label="5. Augment query with retrieved context"]
+	"User Input" -> "LLM (Language Model)" [label="6. Provide original question"]
+	"LLM (Language Model)" -> "Generated Response" [label="7. Generate final response"]
+}
